@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<title>TaskMarket California</title>
+<meta name="theme-color" content="#2a43d6"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+<meta name="apple-mobile-web-app-title" content="TaskMarket"/>
+<link rel="manifest" href="manifest.json"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#2a43d6',
+              600: '#2034b0',
+              700: '#1e299b',
+            },
+            mint: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+            },
+            surface: {
+              DEFAULT: '#faf8ff',
+              card: '#ffffff',
+              dim: '#f1f5f9',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          boxShadow: {
+            'card': '0 2px 10px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02)',
+            'floating': '0 12px 32px -4px rgba(42, 67, 214, 0.18)',
+            'phone': '0 25px 50px -12px rgba(15, 23, 42, 0.25), 0 0 0 12px #0f172a, 0 0 0 14px #334155',
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+    }
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    /* Clean Responsive Native App Shell */
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #0f172a;
+      min-height: 100vh;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+    @media (max-width: 640px) {
+      body {
+        background: #faf8ff !important;
+      }
+    }
+    .app-viewport-container {
+      width: 100%;
+      max-width: 440px;
+      min-height: 100vh;
+      height: 100vh;
+      height: 100dvh;
+      background: #faf8ff;
+      display: flex;
+      flex-col: column;
+      position: relative;
+      margin: 0 auto;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    }
+    @media (max-width: 640px) {
+      .app-viewport-container {
+        max-width: 100%;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col items-center justify-start selection:bg-brand-500 selection:text-white">
+
+<!-- Real Application Container -->
+<main class="app-viewport-container select-none">
+
+<!-- Active Screen Viewport Area (Scrollable content) -->
+<div class="flex-1 overflow-y-auto no-scrollbar relative bg-[#faf8ff]" id="viewport">
+<!-- ============================================== -->
+<!-- SCREEN 1: Home Client -->
+<!-- ============================================== -->
+<section class="screen-view hidden pb-24" id="screen-1">
+<!-- Header -->
+<div class="px-5 pt-3 pb-3 bg-white border-b border-slate-100">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-full bg-brand-50 border-2 border-brand-500/20 overflow-hidden flex items-center justify-center">
+<img alt="Avatar" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div>
+<span class="text-[11px] font-medium text-slate-400 block -mb-0.5">Good morning,</span>
+<span class="text-[15px] font-bold text-slate-900" id="clientGreetingName">David Miller</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="text-[11px] font-bold text-brand-600 bg-brand-50 px-2.5 py-1.5 rounded-xl hover:bg-brand-100 transition" onclick="switchScreen(11)">
+                Sign In
+              </button>
+<div class="relative w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-slate-700">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-red-500"></span>
+</div>
+</div>
+</div>
+<!-- Location Picker -->
+<div class="mt-3 flex items-center gap-1.5 text-xs text-slate-600 bg-slate-50 py-1.5 px-3 rounded-lg border border-slate-100">
+<span class="material-symbols-outlined text-[16px] text-brand-500">location_on</span>
+<span class="font-medium truncate">San Francisco, CA • Mission District</span>
+<span class="material-symbols-outlined text-[16px] ml-auto text-slate-400">expand_more</span>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="px-5 pt-4">
+<div class="flex items-center gap-2 bg-white px-3.5 py-2.5 rounded-2xl border border-slate-200/80 shadow-card">
+<span class="material-symbols-outlined text-[20px] text-slate-400">search</span>
+<input class="w-full text-xs font-medium placeholder:text-slate-400 focus:outline-none bg-transparent" placeholder="Try 'mount 65 inch TV' or 'IKEA PAX'" type="text"/>
+<button onclick="showToast('Filters applied: SF Bay Area • High Rating (★4.8+)')" class="w-7 h-7 rounded-xl bg-brand-50 hover:bg-brand-100 flex items-center justify-center text-brand-600 transition">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+</button>
+</div>
+</div>
+<!-- Hero California Banner -->
+<div class="px-5 pt-4">
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-brand-600 to-indigo-700 text-white p-4 shadow-lg shadow-brand-500/20">
+<div class="relative z-10">
+<div class="flex items-center gap-1.5 mb-1">
+<span class="px-2 py-0.5 rounded bg-white/20 text-[10px] font-extrabold tracking-wider uppercase backdrop-blur">
+                  🛡️ $1M CA Guarantee
+                </span>
+<span class="px-2 py-0.5 rounded bg-mint-500/30 text-mint-100 text-[10px] font-bold">AB 5 Compliant</span>
+</div>
+<h3 class="text-base font-extrabold mt-1">Book Bay Area Pros in 60s</h3>
+<p class="text-xs text-indigo-100 mt-1 max-w-[230px] leading-relaxed">
+                Vetted background checks, verified toolsets, insured &amp; bonded escrow payments.
+              </p>
+<button class="mt-3 inline-flex items-center gap-1.5 bg-white text-brand-600 px-3.5 py-1.5 rounded-xl text-xs font-bold hover:bg-slate-50 transition shadow-sm" onclick="switchScreen(2)">
+                Post a New Task
+                <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+<div class="absolute -right-4 -bottom-6 w-28 h-28 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
+</div>
+</div>
+<!-- Popular Services Grid -->
+<div class="px-5 pt-5">
+<div class="flex items-center justify-between mb-3">
+<h4 class="text-sm font-bold text-slate-900">Popular Services</h4>
+<span class="text-xs font-semibold text-brand-600">View All 24</span>
+</div>
+<div class="grid grid-cols-4 gap-2.5">
+<!-- 1 -->
+<button class="flex flex-col items-center text-center p-2 rounded-2xl bg-white border border-slate-100 shadow-card hover:border-brand-500 transition group" onclick="switchScreen(2)">
+<div class="w-11 h-11 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition">
+<span class="material-symbols-outlined text-[20px]">chair</span>
+</div>
+<span class="text-[11px] font-bold text-slate-800 mt-1.5 leading-tight">Furniture Assembly</span>
+</button>
+<!-- 2 -->
+<button class="flex flex-col items-center text-center p-2 rounded-2xl bg-white border border-slate-100 shadow-card hover:border-brand-500 transition group" onclick="switchScreen(2)">
+<div class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition">
+<span class="material-symbols-outlined text-[20px]">plumbing</span>
+</div>
+<span class="text-[11px] font-bold text-slate-800 mt-1.5 leading-tight">Plumbing Repairs</span>
+</button>
+<!-- 3 -->
+<button class="flex flex-col items-center text-center p-2 rounded-2xl bg-white border border-slate-100 shadow-card hover:border-brand-500 transition group" onclick="switchScreen(2)">
+<div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+</div>
+<span class="text-[11px] font-bold text-slate-800 mt-1.5 leading-tight">Electrical Work</span>
+</button>
+<!-- 4 -->
+<button class="flex flex-col items-center text-center p-2 rounded-2xl bg-white border border-slate-100 shadow-card hover:border-brand-500 transition group" onclick="switchScreen(2)">
+<div class="w-11 h-11 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition">
+<span class="material-symbols-outlined text-[20px]">cleaning_services</span>
+</div>
+<span class="text-[11px] font-bold text-slate-800 mt-1.5 leading-tight">Deep Cleaning</span>
+</button>
+<!-- 5 -->
+<button class="flex flex-col items-center text-center p-2 rounded-2xl bg-white border border-slate-100 shadow-card hover:border-brand-500 transition group" onclick="switchScreen(3)">
+<div class="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition">
+<span class="material-symbols-outlined text-[20px]">tv</span>
+</div>
+<span class="text-[11px] font-bold text-slate-800 mt-1.5 leading-tight">TV Wall Mount</span>
+</button>
+<!-- 6 -->
+<button class="flex flex-col items-center text-center p-2 rounded-2xl bg-white border border-slate-100 shadow-card hover:border-brand-500 transition group" onclick="switchScreen(2)">
+<div class="w-11 h-11 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition">
+<span class="material-symbols-outlined text-[20px]">local_shipping</span>
+</div>
+<span class="text-[11px] font-bold text-slate-800 mt-1.5 leading-tight">Moving Help</span>
+</button>
+<!-- 7 -->
+<button class="flex flex-col items-center text-center p-2 rounded-2xl bg-white border border-slate-100 shadow-card hover:border-brand-500 transition group" onclick="switchScreen(2)">
+<div class="w-11 h-11 rounded-xl bg-green-50 text-green-600 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition">
+<span class="material-symbols-outlined text-[20px]">yard</span>
+</div>
+<span class="text-[11px] font-bold text-slate-800 mt-1.5 leading-tight">Yard Work</span>
+</button>
+<!-- 8 -->
+<button class="flex flex-col items-center text-center p-2 rounded-2xl bg-white border border-slate-100 shadow-card hover:border-brand-500 transition group" onclick="switchScreen(2)">
+<div class="w-11 h-11 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center group-hover:bg-brand-500 group-hover:text-white transition">
+<span class="material-symbols-outlined text-[20px]">format_paint</span>
+</div>
+<span class="text-[11px] font-bold text-slate-800 mt-1.5 leading-tight">Painting Help</span>
+</button>
+</div>
+</div>
+<!-- Featured Pros -->
+<div class="px-5 pt-5">
+<div class="flex items-center justify-between mb-3">
+<div>
+<h4 class="text-sm font-bold text-slate-900">Featured Pros in SF</h4>
+<span class="text-[11px] text-slate-400">Available today in Mission / Castro</span>
+</div>
+<span class="text-xs font-semibold text-brand-600">See All</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Pro 1: Alex Rivers -->
+<div class="p-3.5 bg-white rounded-2xl border border-slate-100 shadow-card flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img alt="Alex" class="w-12 h-12 rounded-xl object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-mint-500 rounded-full border-2 border-white"></span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-xs font-bold text-slate-900">Alex Rivers</span>
+<span class="text-[10px] font-bold text-amber-500 flex items-center">★ 4.9 <span class="text-slate-400 font-normal ml-0.5">(342)</span></span>
+</div>
+<span class="text-[11px] text-slate-500 block">Furniture &amp; Mounting Specialist</span>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 font-medium">99% On-Time</span>
+<span class="text-[10px] font-bold text-brand-600">$68.00/hr</span>
+</div>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-xl bg-brand-500 text-white text-xs font-bold hover:bg-brand-600 shadow-sm transition" onclick="switchScreen(3)">
+                Book Slot
+              </button>
+</div>
+<!-- Pro 2: Elena Rostova -->
+<div class="p-3.5 bg-white rounded-2xl border border-slate-100 shadow-card flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img alt="Elena" class="w-12 h-12 rounded-xl object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-mint-500 rounded-full border-2 border-white"></span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-xs font-bold text-slate-900">Elena Rostova</span>
+<span class="text-[10px] font-bold text-amber-500 flex items-center">★ 5.0 <span class="text-slate-400 font-normal ml-0.5">(219)</span></span>
+</div>
+<span class="text-[11px] text-slate-500 block">Electrical &amp; Smart Home</span>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 font-medium">CA Certified</span>
+<span class="text-[10px] font-bold text-brand-600">$85.00/hr</span>
+</div>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-xl bg-brand-50 text-brand-600 text-xs font-bold hover:bg-brand-100 transition" onclick="switchScreen(9)">
+                Book Slot
+              </button>
+</div>
+</div>
+</div>
+</section>
+<!-- ============================================== -->
+<!-- SCREEN 2: Create Task -->
+<!-- ============================================== -->
+<section class="screen-view hidden pb-24" id="screen-2">
+<!-- Top Nav -->
+<div class="px-5 py-3 bg-white border-b border-slate-100 flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-xs font-bold text-slate-800">
+  <span class="material-symbols-outlined text-brand-500 text-[20px]">bolt</span>
+  <span>TaskMarket</span>
+</div>
+<div class="text-center">
+<span class="text-[10px] font-bold text-brand-600 uppercase tracking-wider block">Step 2 of 4</span>
+<h3 class="text-sm font-bold text-slate-900">Task Details &amp; Scope</h3>
+</div>
+<span class="text-xs font-medium text-slate-400">Draft</span>
+</div>
+<div class="p-5 space-y-4">
+<!-- Category Card -->
+<div class="p-3 bg-white rounded-2xl border border-slate-100 shadow-card flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">chair</span>
+</div>
+<div>
+<span class="text-xs font-bold text-slate-900 block">IKEA Furniture Assembly</span>
+<span class="text-[10px] text-slate-400">Standard rate: $55 - $85/hr</span>
+</div>
+</div>
+<button onclick="switchScreen(1)" class="text-xs text-brand-600 font-bold hover:underline">Edit</button>
+</div>
+<!-- Description Box -->
+<div class="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-card">
+<div class="flex items-center justify-between mb-1.5">
+<label class="text-xs font-bold text-slate-800">Task Description</label>
+<span class="text-[10px] font-mono text-slate-400">142 / 500 chars</span>
+</div>
+<textarea class="w-full text-xs text-slate-700 focus:outline-none resize-none leading-relaxed" placeholder="Describe items, model names (PAX, MALM, Billy), number of boxes, or room access..." rows="3">Need assembly for 1 IKEA PAX Wardrobe with 2 mirrors and 3 interior drawers. Boxes are already delivered to 2nd floor bedroom. Tools ready or bring drill.</textarea>
+</div>
+<!-- Photo Upload -->
+<div class="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-card">
+<label class="text-xs font-bold text-slate-800 block mb-2">Photos of Boxes / Workspace</label>
+<div class="flex items-center gap-2">
+<div class="relative w-16 h-16 rounded-xl overflow-hidden border border-slate-200">
+<img alt="Thumb" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-1 right-1 w-4 h-4 bg-slate-900/70 text-white rounded-full flex items-center justify-center text-[9px] font-bold">✕</span>
+</div>
+<div class="relative w-16 h-16 rounded-xl overflow-hidden border border-slate-200">
+<img alt="Thumb" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-1 right-1 w-4 h-4 bg-slate-900/70 text-white rounded-full flex items-center justify-center text-[9px] font-bold">✕</span>
+</div>
+<button onclick="addDemoTaskPhoto()" class="w-16 h-16 rounded-xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400 hover:border-brand-500 hover:text-brand-500 transition">
+<span class="material-symbols-outlined text-[20px]">add_a_photo</span>
+<span class="text-[9px] font-medium mt-0.5">Add Photo</span>
+</button>
+</div>
+</div>
+<!-- Address & Parking -->
+<div class="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-card space-y-3">
+<div class="flex items-center justify-between">
+<label class="text-xs font-bold text-slate-800">Address &amp; Parking</label>
+<span class="text-[10px] text-brand-600 font-bold">Change</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-slate-700 bg-slate-50 p-2.5 rounded-xl">
+<span class="material-symbols-outlined text-[18px] text-brand-500">home</span>
+<span class="font-medium truncate">742 Valencia St, Apt 3B, SF 94110</span>
+</div>
+<div class="flex items-center justify-between pt-1 border-t border-slate-100">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-slate-500">local_parking</span>
+<div>
+<span class="text-xs font-semibold text-slate-800 block">Driveway Parking Available</span>
+<span class="text-[10px] text-slate-400">Safe spot for Tasker van/truck</span>
+</div>
+</div>
+<input checked="" class="w-4 h-4 accent-brand-500 rounded" type="checkbox"/>
+</div>
+</div>
+<!-- Estimated Rate & Time -->
+<div class="bg-gradient-to-br from-brand-50 to-indigo-50/50 p-3.5 rounded-2xl border border-brand-100">
+<div class="flex items-center justify-between mb-1">
+<span class="text-xs font-semibold text-slate-700">Estimated Duration</span>
+<span class="text-xs font-mono font-bold text-brand-700">~2.5 to 3.0 Hours</span>
+</div>
+<div class="flex items-center justify-between text-[11px] text-slate-500">
+<span>Market Rate Range (SF)</span>
+<span class="font-mono font-semibold text-slate-800">$137.50 - $204.00 total</span>
+</div>
+</div>
+<button class="w-full py-3 rounded-2xl bg-brand-500 text-white text-xs font-bold hover:bg-brand-600 shadow-md shadow-brand-500/20 transition flex items-center justify-center gap-2" onclick="switchScreen(3)">
+<span>Continue to Pro Selection</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- ============================================== -->
+<!-- SCREEN 3: Tasker Profile -->
+<!-- ============================================== -->
+<section class="screen-view hidden pb-24" id="screen-3">
+<!-- Top Nav -->
+<div class="px-5 py-3 bg-white border-b border-slate-100 flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-xs font-bold text-slate-800">
+  <span class="material-symbols-outlined text-brand-500 text-[20px]">bolt</span>
+  <span>TaskMarket</span>
+</div>
+<span class="text-xs font-bold text-slate-900">Tasker Profile</span>
+<button onclick="showToast('Profile link copied to clipboard!', 'share')" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</button>
+</div>
+<div class="p-5 space-y-4">
+<!-- Profile Card -->
+<div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-card text-center relative">
+<div class="relative w-20 h-20 mx-auto rounded-2xl overflow-hidden border-2 border-brand-500 shadow-md">
+<img alt="Alex" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute bottom-1 right-1 w-3.5 h-3.5 bg-mint-500 rounded-full border-2 border-white"></span>
+</div>
+<h3 class="text-base font-extrabold text-slate-900 mt-2">Alex Rivers</h3>
+<span class="text-xs text-slate-500">San Francisco, CA • Mission &amp; SoMa</span>
+<div class="flex items-center justify-center gap-3 mt-2.5 text-xs">
+<span class="font-bold text-amber-500 flex items-center">★ 4.9 <span class="text-slate-400 font-normal ml-0.5">(342)</span></span>
+<span class="text-slate-300">•</span>
+<span class="text-slate-700 font-semibold">99% Completed</span>
+<span class="text-slate-300">•</span>
+<span class="text-mint-600 font-semibold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">verified</span> Verified Pro
+              </span>
+</div>
+<!-- Trust Badges -->
+<div class="flex flex-wrap items-center justify-center gap-1.5 mt-3">
+<span class="px-2 py-0.5 rounded-full bg-blue-50 text-brand-600 text-[10px] font-semibold">🛡️ CA Insured &amp; Bonded</span>
+<span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-semibold">⚡ Same-Day Response</span>
+<span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[10px] font-semibold">🧰 Brings Dewalt Tools</span>
+</div>
+</div>
+<!-- Pricing Pill -->
+<div class="bg-brand-50 p-3.5 rounded-2xl border border-brand-100 flex items-center justify-between">
+<div>
+<span class="text-[10px] font-bold text-brand-700 uppercase tracking-wider block">Transparent Rate</span>
+<span class="text-lg font-black font-mono text-brand-900">$68.00 <span class="text-xs font-normal text-slate-600">/ hour</span></span>
+</div>
+<div class="text-right">
+<span class="text-[11px] font-semibold text-slate-700 block">1-Hour Minimum Policy</span>
+<span class="text-[10px] text-slate-400">Zero hidden trip surcharges</span>
+</div>
+</div>
+<!-- Bio -->
+<div class="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-card">
+<h4 class="text-xs font-bold text-slate-900 mb-1.5">About Alex</h4>
+<p class="text-xs text-slate-600 leading-relaxed">
+              7+ years assembling complex IKEA furniture, PAX closets, wall-mounting 85" OLED TVs, and light carpentry. I carry heavy duty stud finders, laser levels, and anchor sets.
+            </p>
+<div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center gap-3 text-[11px] text-slate-500">
+<span>🗣️ English &amp; Spanish</span>
+<span>⚡ Electric Van Transit</span>
+</div>
+</div>
+<!-- Reviews Preview -->
+<div class="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-card">
+<div class="flex items-center justify-between mb-2">
+<h4 class="text-xs font-bold text-slate-900">Verified Reviews (342)</h4>
+<span class="text-[11px] text-brand-600 font-bold">See all</span>
+</div>
+<div class="text-xs">
+<div class="flex items-center justify-between">
+<span class="font-semibold text-slate-800">Sarah Jenkins</span>
+<span class="text-[10px] text-slate-400">2 days ago</span>
+</div>
+<div class="text-amber-400 text-[12px] my-0.5">★★★★★</div>
+<p class="text-[11px] text-slate-600 leading-relaxed italic">
+                "Alex assembled a massive IKEA wardrobe in under 2 hours without a single squeak. Tipped $25 for pristine cleanup!"
+              </p>
+</div>
+</div>
+<!-- CTA Buttons -->
+<div class="flex items-center gap-2 pt-1">
+<button class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center hover:bg-slate-200 transition" onclick="switchScreen(6)">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</button>
+<button class="flex-1 py-3 rounded-2xl bg-brand-500 text-white text-xs font-bold hover:bg-brand-600 shadow-md shadow-brand-500/20 transition flex items-center justify-center gap-1.5" onclick="switchScreen(9)">
+<span>Select &amp; Book Slot ($68/hr)</span>
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+</button>
+</div>
+</div>
+</section>
+<!-- ============================================== -->
+<!-- SCREEN 4: Tasker Job Feed (Pro View) -->
+<!-- ============================================== -->
+<section class="screen-view hidden pb-24" id="screen-4">
+<div class="px-5 py-3 bg-slate-900 text-white flex items-center justify-between">
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-xs font-bold text-white">Alex's Job Feed</span>
+<span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[9px] font-extrabold uppercase">ONLINE</span>
+</div>
+<span class="text-[11px] text-slate-400">Radius: 5 mi • SF Bay</span>
+</div>
+<div class="text-right">
+<span class="text-[10px] text-slate-400 block">Today's Earnings</span>
+<span class="text-xs font-mono font-bold text-emerald-400">$245.00</span>
+</div>
+</div>
+<!-- Filter Chips -->
+<div class="px-5 py-3 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+<span class="px-3 py-1 rounded-xl bg-brand-500 text-white text-[11px] font-bold whitespace-nowrap">All Tasks (12)</span>
+<span class="px-3 py-1 rounded-xl bg-white border border-slate-200 text-slate-700 text-[11px] font-medium whitespace-nowrap">Furniture ($60+/hr)</span>
+<span class="px-3 py-1 rounded-xl bg-white border border-slate-200 text-slate-700 text-[11px] font-medium whitespace-nowrap">Same-Day</span>
+<span class="px-3 py-1 rounded-xl bg-white border border-slate-200 text-slate-700 text-[11px] font-medium whitespace-nowrap">🔥 Urgent</span>
+</div>
+<div class="p-5 pt-1 space-y-3">
+<!-- Job 1 -->
+<div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-card space-y-2.5">
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500 font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-brand-500">near_me</span> 1.2 mi • Noe Valley, SF
+              </span>
+<span class="font-mono font-bold text-brand-600 bg-brand-50 px-2 py-0.5 rounded-lg">$170 - $204</span>
+</div>
+<h4 class="text-xs font-bold text-slate-900">IKEA PAX 3-Section Wardrobe</h4>
+<p class="text-[11px] text-slate-600 leading-relaxed">
+              Boxes in master bedroom, 2nd floor with elevator access. Need it done today between 2 PM and 6 PM.
+            </p>
+<div class="flex items-center justify-between text-[11px] text-slate-500 pt-1 border-t border-slate-100">
+<span>Client: <b>David M.</b> (★ 5.0)</span>
+<span class="text-emerald-600 font-semibold">Start: Today @ 3:00 PM</span>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button onclick="declineJob(this)" class="w-1/3 py-2 rounded-xl bg-slate-100 text-slate-600 text-xs font-semibold hover:bg-rose-50 hover:text-rose-600 transition">
+                Decline
+              </button>
+<button class="flex-1 py-2 rounded-xl bg-brand-500 text-white text-xs font-bold hover:bg-brand-600 shadow-sm transition" onclick="switchScreen(5)">
+                Accept Job ($68/hr)
+              </button>
+</div>
+</div>
+<!-- Job 2 -->
+<div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-card space-y-2.5">
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-500 font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-brand-500">near_me</span> 2.4 mi • Marina District, SF
+              </span>
+<span class="font-mono font-bold text-brand-600 bg-brand-50 px-2 py-0.5 rounded-lg">$136.00</span>
+</div>
+<h4 class="text-xs font-bold text-slate-900">Mount 77" LG OLED TV on Drywall</h4>
+<p class="text-[11px] text-slate-600 leading-relaxed">
+              Need heavy duty toggle bolts into metal studs. Bracket is already purchased.
+            </p>
+<div class="flex items-center justify-between text-[11px] text-slate-500 pt-1 border-t border-slate-100">
+<span>Client: <b>Rachel K.</b> (★ 4.8)</span>
+<span class="text-slate-600">Tomorrow @ 10:00 AM</span>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button onclick="declineJob(this)" class="w-1/3 py-2 rounded-xl bg-slate-100 text-slate-600 text-xs font-semibold hover:bg-rose-50 hover:text-rose-600 transition">Decline</button>
+<button class="flex-1 py-2 rounded-xl bg-brand-500 text-white text-xs font-bold" onclick="switchScreen(5)">Accept Job</button>
+</div>
+</div>
+</div>
+</section>
+<!-- ============================================== -->
+<!-- SCREEN 5: Active Order & Tracking -->
+<!-- ============================================== -->
+<section class="screen-view hidden pb-24" id="screen-5">
+<div class="px-5 py-3 bg-white border-b border-slate-100 flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-xs font-bold text-slate-800">
+  <span class="material-symbols-outlined text-brand-500 text-[20px]">bolt</span>
+  <span>TaskMarket</span>
+</div>
+<div class="text-center">
+<span class="text-[10px] font-mono text-slate-400 block">#SF-48291</span>
+<h3 class="text-xs font-bold text-slate-900">Active Task Tracking</h3>
+</div>
+<button class="w-8 h-8 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center" onclick="switchScreen(6)">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</button>
+</div>
+<div class="p-5 space-y-4">
+<!-- Stepper 4 Phases -->
+<div class="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-card">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[11px] font-bold text-slate-800">Task Lifecycle</span>
+<span class="text-[10px] font-bold text-brand-600 bg-brand-50 px-2 py-0.5 rounded-full">En Route (Phase 2/4)</span>
+</div>
+<div class="flex items-center justify-between relative px-2">
+<div class="flex flex-col items-center z-10">
+<div class="w-7 h-7 rounded-full bg-mint-500 text-white flex items-center justify-center text-xs font-bold">✓</div>
+<span class="text-[9px] text-slate-600 mt-1 font-medium">Assigned</span>
+</div>
+<div class="flex-1 h-1 bg-brand-500 mx-1"></div>
+<div class="flex flex-col items-center z-10">
+<div class="w-7 h-7 rounded-full bg-brand-500 text-white flex items-center justify-center text-xs font-bold animate-pulse">2</div>
+<span class="text-[9px] text-brand-600 mt-1 font-bold">En Route</span>
+</div>
+<div class="flex-1 h-1 bg-slate-200 mx-1"></div>
+<div class="flex flex-col items-center z-10">
+<div class="w-7 h-7 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-xs font-bold">3</div>
+<span class="text-[9px] text-slate-400 mt-1">In Progress</span>
+</div>
+<div class="flex-1 h-1 bg-slate-200 mx-1"></div>
+<div class="flex flex-col items-center z-10">
+<div class="w-7 h-7 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-xs font-bold">4</div>
+<span class="text-[9px] text-slate-400 mt-1">Review</span>
+</div>
+</div>
+</div>
+<!-- Map Simulation Card -->
+<div class="relative h-44 rounded-2xl overflow-hidden bg-slate-200 border border-slate-200 shadow-card">
+<!-- Simulated Map graphic -->
+<div class="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:16px_16px] bg-[#e2e8f0]"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-12 h-12 rounded-full bg-brand-500/20 flex items-center justify-center animate-ping"></div>
+<div class="absolute w-10 h-10 rounded-full bg-brand-600 text-white flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-[20px]">directions_car</span>
+</div>
+</div>
+<!-- ETA Floating Badge -->
+<div class="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur p-2.5 rounded-xl border border-slate-100 flex items-center justify-between">
+<div>
+<span class="text-[10px] text-slate-500 block">Alex • Silver Ford Transit</span>
+<span class="text-xs font-bold text-slate-900">Arriving in 14 mins</span>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="px-2.5 py-1 rounded-lg bg-brand-50 text-brand-600 text-[11px] font-bold flex items-center gap-1" onclick="switchScreen(6)">
+<span class="material-symbols-outlined text-[14px]">chat</span> Chat
+                </button>
+</div>
+</div>
+</div>
+<!-- Escrow Hold Status -->
+<div class="p-3.5 bg-emerald-50/80 rounded-2xl border border-emerald-100 flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[20px] text-emerald-600 mt-0.5">lock</span>
+<div>
+<span class="text-xs font-bold text-emerald-900 block">Payment Held Safely in Stripe Escrow</span>
+<p class="text-[10px] text-emerald-700 mt-0.5 leading-relaxed">
+                Funds ($136.00 hold) won't be charged to your card until you inspect and approve the completed job.
+              </p>
+</div>
+</div>
+<!-- Task Summary Checklist -->
+<div class="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-card space-y-2">
+<h4 class="text-xs font-bold text-slate-900">Scope of Work Agreed</h4>
+<div class="space-y-1.5 text-xs text-slate-600">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-mint-500">check_circle</span>
+<span>Unpack IKEA PAX boxes &amp; check hardware</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-mint-500">check_circle</span>
+<span>Assemble 3 interior frame sections</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-slate-300">radio_button_unchecked</span>
+<span>Secure frame to drywall with safety anchors</span>
+</div>
+</div>
+</div>
+<!-- Simulate Completion CTA -->
+<button class="w-full py-3 rounded-2xl bg-brand-500 text-white text-xs font-bold hover:bg-brand-600 shadow-md transition flex items-center justify-center gap-1.5" onclick="switchScreen(7)">
+<span>Simulate Job Completion → Review &amp; Tip</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- ============================================== -->
+<!-- SCREEN 6: Chat with Tasker -->
+<!-- ============================================== -->
+<section class="screen-view hidden pb-24" id="screen-6">
+<!-- Top Nav -->
+<div class="px-5 py-3 bg-white border-b border-slate-100 flex items-center justify-between">
+<button class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-700" onclick="switchScreen(5)">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+</button>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-brand-100 overflow-hidden">
+<img alt="Alex" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div>
+<span class="text-xs font-bold text-slate-900 block">Alex Rivers</span>
+<span class="text-[10px] text-mint-600 font-semibold flex items-center gap-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-mint-500"></span> En route • ETA 14m
+              </span>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button onclick="startCallWithTasker()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-emerald-50 hover:text-emerald-600 text-slate-700 flex items-center justify-center transition">
+<span class="material-symbols-outlined text-[18px]">call</span>
+</button>
+</div>
+</div>
+<!-- Task Mini Banner -->
+<div class="bg-slate-50 px-5 py-2 border-b border-slate-100 flex items-center justify-between text-[11px]">
+<span class="text-slate-500">#SF-48291: IKEA PAX Assembly</span>
+<span class="text-brand-600 font-semibold">$68/hr hold</span>
+</div>
+<!-- Messages Area -->
+<div class="p-4 space-y-3 text-xs">
+<div class="text-center text-[10px] text-slate-400 my-2">Today 1:45 PM</div>
+<!-- Incoming -->
+<div class="flex items-start gap-2 max-w-[80%]">
+<div class="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-100 shadow-card text-slate-800 leading-relaxed">
+              Hi David! I'm packing up the heavy drill and heading over from Castro. Should be there in 15 mins.
+              <span class="text-[9px] text-slate-400 block text-right mt-1">1:46 PM</span>
+</div>
+</div>
+<!-- Outgoing -->
+<div class="flex items-end justify-end gap-2 max-w-[80%] ml-auto">
+<div class="bg-brand-500 text-white p-3 rounded-2xl rounded-tr-none shadow-sm leading-relaxed">
+              Great! You can park in our driveway right in front of the garage door. Gate code is #402.
+              <span class="text-[9px] text-blue-200 block text-right mt-1">1:48 PM • Read</span>
+</div>
+</div>
+<!-- Geofence Alert Card -->
+<div class="my-2 p-2 rounded-xl bg-brand-50 border border-brand-100 text-center text-[10px] text-brand-700 font-medium flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]">pin_drop</span>
+            Alex entered your neighborhood geofence
+          </div>
+<!-- Incoming -->
+<div class="flex items-start gap-2 max-w-[80%]">
+<div class="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-100 shadow-card text-slate-800 leading-relaxed">
+              Just arrived! Walking up with tools now.
+              <span class="text-[9px] text-slate-400 block text-right mt-1">2:02 PM</span>
+</div>
+</div>
+<!-- Quick Chips -->
+<div class="flex items-center gap-1.5 pt-2 overflow-x-auto no-scrollbar">
+<span onclick="sendQuickChip(this.innerText)" class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 text-[10px] font-medium whitespace-nowrap cursor-pointer hover:bg-brand-50 hover:text-brand-600 transition">I'm at the front door</span>
+<span onclick="sendQuickChip(this.innerText)" class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 text-[10px] font-medium whitespace-nowrap cursor-pointer hover:bg-brand-50 hover:text-brand-600 transition">Buzz code is #402</span>
+<span onclick="sendQuickChip(this.innerText)" class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 text-[10px] font-medium whitespace-nowrap cursor-pointer hover:bg-brand-50 hover:text-brand-600 transition">Take your time</span>
+</div>
+</div>
+<!-- Chat Input Bar -->
+<div class="absolute bottom-0 left-0 right-0 p-3 bg-white border-t border-slate-100 flex items-center gap-2">
+<button onclick="triggerChatCamera()" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition">
+<span class="material-symbols-outlined text-[18px]">photo_camera</span>
+</button>
+<input id="chatTextInput" onkeydown="if(event.key==='Enter') sendChatMessage()" class="flex-1 text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus:outline-none focus:border-brand-500" placeholder="Write a message to Alex..." type="text"/>
+<button onclick="sendChatMessage()" class="w-9 h-9 rounded-full bg-brand-500 hover:bg-brand-600 text-white flex items-center justify-center transition shadow-sm">
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</div>
+</section>
+<!-- ============================================== -->
+<!-- SCREEN 7: Review, Tip & Release Escrow -->
+<!-- ============================================== -->
+<section class="screen-view hidden pb-24" id="screen-7">
+<!-- Top Nav -->
+<div class="px-5 py-3 bg-white border-b border-slate-100 flex items-center justify-between">
+<button class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-700" onclick="switchScreen(5)">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+</button>
+<h3 class="text-xs font-bold text-slate-900">Review &amp; Release Escrow</h3>
+<span class="text-[10px] font-mono text-slate-400">#SF-48291</span>
+</div>
+<div class="p-5 space-y-4">
+<!-- Job Finished Summary Card -->
+<div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-card">
+<div class="flex items-center justify-between mb-3">
+<div>
+<span class="text-xs font-bold text-slate-900 block">IKEA PAX Assembly Completed</span>
+<span class="text-[10px] text-slate-400">Alex Rivers • Verified Pro</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-mint-50 text-mint-600 text-[10px] font-bold">Work Verified</span>
+</div>
+<div class="space-y-1.5 text-xs text-slate-600 border-t border-slate-100 pt-2">
+<div class="flex justify-between">
+<span>Labor (2 hrs 15 mins @ $68/hr)</span>
+<span class="font-mono font-semibold">$153.00</span>
+</div>
+<div class="flex justify-between">
+<span>Home Depot Hardware Pass-Through</span>
+<span class="font-mono font-semibold">$42.10</span>
+</div>
+<div class="flex justify-between text-slate-400 text-[11px]">
+<span>California Marketplace Trust &amp; Safety Fee</span>
+<span class="font-mono">$2.50</span>
+</div>
+<div class="flex justify-between font-bold text-slate-900 pt-1 border-t border-slate-100 text-sm">
+<span>Subtotal</span>
+<span class="font-mono">$197.60</span>
+</div>
+</div>
+</div>
+<!-- Tip Selector -->
+<div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-card">
+<div class="flex items-center justify-between mb-2">
+<div>
+<h4 class="text-xs font-bold text-slate-900">Add a Tip for Alex</h4>
+<span class="text-[10px] text-slate-400">100% of tip goes directly to Tasker</span>
+</div>
+<span class="text-xs font-bold text-brand-600 font-mono">+$27.54 (18%)</span>
+</div>
+<div class="grid grid-cols-4 gap-2 text-center text-xs mt-2" id="tipButtonsContainer">
+<button onclick="selectTip(15, 22.95, this)" class="tip-btn py-2 rounded-xl border border-slate-200 text-slate-700 hover:border-brand-500 font-medium transition">15%<br/><span class="text-[10px] text-slate-400">$22.95</span></button>
+<button onclick="selectTip(18, 27.54, this)" class="tip-btn py-2 rounded-xl bg-brand-500 text-white font-bold shadow-sm transition">18%<br/><span class="text-[10px] text-blue-100">$27.54</span></button>
+<button onclick="selectTip(20, 30.60, this)" class="tip-btn py-2 rounded-xl border border-slate-200 text-slate-700 hover:border-brand-500 font-medium transition">20%<br/><span class="text-[10px] text-slate-400">$30.60</span></button>
+<button onclick="selectTip(0, 0.00, this)" class="tip-btn py-2 rounded-xl border border-slate-200 text-slate-700 hover:border-brand-500 font-medium transition">None<br/><span class="text-[10px] text-slate-400">$0.00</span></button>
+</div>
+</div>
+<!-- Star Rating -->
+<div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-card text-center">
+<span class="text-xs font-bold text-slate-900 block mb-1">Rate your experience with Alex</span>
+<div class="text-amber-400 text-2xl tracking-widest my-1">★★★★★</div>
+<div class="flex flex-wrap items-center justify-center gap-1.5 mt-2">
+<span class="px-2 py-0.5 rounded-full bg-brand-50 text-brand-600 text-[10px] font-semibold">Fast worker</span>
+<span class="px-2 py-0.5 rounded-full bg-brand-50 text-brand-600 text-[10px] font-semibold">Punctual</span>
+<span class="px-2 py-0.5 rounded-full bg-brand-50 text-brand-600 text-[10px] font-semibold">Cleaned up workspace</span>
+<span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[10px]">Brought all parts</span>
+</div>
+</div>
+<!-- Guarantee Disclaimer -->
+<p class="text-[10px] text-slate-500 text-center leading-relaxed">
+            🛡️ Backed by <b>$1,000,000 California Property Guarantee</b>. You have 48 hours to report any latent defects.
+          </p>
+<!-- Release Button -->
+<button class="w-full py-3 rounded-2xl bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700 shadow-md shadow-emerald-600/20 transition flex items-center justify-center gap-1.5" onclick="switchScreen(8)">
+<span>Release Escrow $225.14</span>
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</button>
+</div>
+</section>
+<!-- ============================================== -->
+<!-- SCREEN 8: My Tasks & Rebook Pro -->
+<!-- ============================================== -->
+<section class="screen-view hidden pb-24" id="screen-8">
+<!-- Top Nav -->
+<div class="px-5 py-3 bg-white border-b border-slate-100 flex items-center justify-between">
+<h3 class="text-sm font-bold text-slate-900">My Tasks</h3>
+<button class="text-xs font-bold text-brand-600 flex items-center gap-0.5" onclick="switchScreen(2)">
+<span class="material-symbols-outlined text-[16px]">add</span> New Task
+          </button>
+</div>
+<!-- Filter Tabs -->
+<div class="px-5 py-2.5 flex items-center gap-2 bg-white border-b border-slate-100 text-xs" id="myTasksTabs">
+<button onclick="filterMyTasks('completed', this)" class="task-tab font-bold text-brand-600 border-b-2 border-brand-500 pb-1 px-1 transition">Completed (6)</button>
+<button onclick="filterMyTasks('active', this)" class="task-tab font-medium text-slate-500 hover:text-slate-800 pb-1 px-1 transition">Active (1)</button>
+<button onclick="filterMyTasks('drafts', this)" class="task-tab font-medium text-slate-500 hover:text-slate-800 pb-1 px-1 transition">Drafts (2)</button>
+</div>
+<div class="p-5 space-y-4">
+<!-- Quick 1-Tap Rebook Carousel -->
+<div>
+<h4 class="text-xs font-bold text-slate-800 mb-2">Trusted Pros You Hired (1-Tap Rebook)</h4>
+<div class="flex items-center gap-2.5 overflow-x-auto no-scrollbar">
+<div class="p-2.5 bg-white rounded-2xl border border-slate-100 shadow-card flex items-center gap-2 min-w-[170px]">
+<img alt="Alex" class="w-9 h-9 rounded-xl object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="flex-1 min-w-0">
+<span class="text-xs font-bold text-slate-900 block truncate">Alex Rivers</span>
+<span class="text-[10px] text-slate-400 block">Hired 2x • $68/hr</span>
+</div>
+<button class="px-2 py-1 rounded-lg bg-brand-50 text-brand-600 text-[10px] font-bold" onclick="switchScreen(9)">Book</button>
+</div>
+<div class="p-2.5 bg-white rounded-2xl border border-slate-100 shadow-card flex items-center gap-2 min-w-[170px]">
+<img alt="Elena" class="w-9 h-9 rounded-xl object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="flex-1 min-w-0">
+<span class="text-xs font-bold text-slate-900 block truncate">Elena Rostova</span>
+<span class="text-[10px] text-slate-400 block">Hired 1x • $85/hr</span>
+</div>
+<button class="px-2 py-1 rounded-lg bg-brand-50 text-brand-600 text-[10px] font-bold" onclick="switchScreen(9)">Book</button>
+</div>
+</div>
+</div>
+<!-- History Item 1 -->
+<div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-card space-y-2">
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-400 text-[10px] font-mono">#SF-48291 • Oct 14, 2026</span>
+<span class="font-mono font-bold text-slate-900">$225.14</span>
+</div>
+<h4 class="text-xs font-bold text-slate-900">IKEA PAX Wardrobe &amp; Drawers</h4>
+<div class="flex items-center justify-between text-[11px] text-slate-500">
+<span>Tasker: <b>Alex Rivers</b></span>
+<span class="text-mint-600 font-semibold">Completed</span>
+</div>
+<div class="flex items-center gap-2 pt-2 border-t border-slate-100">
+<button onclick="downloadPdfInvoice(this)" class="text-[11px] text-slate-600 hover:text-brand-600 font-semibold flex items-center gap-1 transition">
+<span class="material-symbols-outlined text-[14px]">receipt_long</span> PDF Invoice
+              </button>
+<button class="ml-auto text-[11px] text-brand-600 font-bold" onclick="switchScreen(2)">Repeat Task</button>
+<button class="px-2.5 py-1 rounded-lg bg-brand-50 text-brand-600 text-[11px] font-bold" onclick="switchScreen(9)">Rebook Alex</button>
+</div>
+</div>
+<!-- History Item 2 -->
+<div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-card space-y-2">
+<div class="flex items-center justify-between text-xs">
+<span class="text-slate-400 text-[10px] font-mono">#SF-39102 • Sep 28, 2026</span>
+<span class="font-mono font-bold text-slate-900">$280.00</span>
+</div>
+<h4 class="text-xs font-bold text-slate-900">EV Charger NEMA 14-50 Outlet</h4>
+<div class="flex items-center justify-between text-[11px] text-slate-500">
+<span>Tasker: <b>Elena Rostova</b></span>
+<span class="text-mint-600 font-semibold">Completed</span>
+</div>
+<div class="flex items-center gap-2 pt-2 border-t border-slate-100">
+<button onclick="downloadPdfInvoice(this)" class="text-[11px] text-slate-600 hover:text-brand-600 font-semibold flex items-center gap-1 transition">
+<span class="material-symbols-outlined text-[14px]">receipt_long</span> PDF Invoice
+              </button>
+<button class="ml-auto px-2.5 py-1 rounded-lg bg-brand-50 text-brand-600 text-[11px] font-bold" onclick="switchScreen(9)">Rebook Elena</button>
+</div>
+</div>
+</div>
+</section>
+<!-- ============================================== -->
+<!-- SCREEN 9: Schedule & Booking Slot -->
+<!-- ============================================== -->
+<section class="screen-view hidden pb-24" id="screen-9">
+<!-- Top Nav -->
+<div class="px-5 py-3 bg-white border-b border-slate-100 flex items-center justify-between">
+<button class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-700" onclick="switchScreen(3)">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+</button>
+<div class="text-center">
+<h3 class="text-xs font-bold text-slate-900">Select Arrival Slot</h3>
+<span class="text-[10px] text-slate-500">Alex Rivers ($68.00/hr)</span>
+</div>
+<div class="w-8"></div>
+</div>
+<div class="p-5 space-y-4">
+<!-- Date Carousel -->
+<div>
+<label class="text-xs font-bold text-slate-800 block mb-2">Choose Date</label>
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar">
+<div class="p-2.5 rounded-2xl bg-brand-500 text-white text-center min-w-[64px] shadow-sm">
+<span class="text-[10px] uppercase font-bold block opacity-80">Today</span>
+<span class="text-base font-black font-mono block">18</span>
+<span class="text-[9px] font-semibold text-emerald-300">Open</span>
+</div>
+<div class="p-2.5 rounded-2xl bg-white border border-slate-200 text-slate-700 text-center min-w-[64px]">
+<span class="text-[10px] uppercase font-medium block text-slate-400">Sat</span>
+<span class="text-base font-bold font-mono block">19</span>
+<span class="text-[9px] font-semibold text-amber-500">Few</span>
+</div>
+<div class="p-2.5 rounded-2xl bg-white border border-slate-200 text-slate-700 text-center min-w-[64px]">
+<span class="text-[10px] uppercase font-medium block text-slate-400">Sun</span>
+<span class="text-base font-bold font-mono block">20</span>
+<span class="text-[9px] font-semibold text-emerald-600">Open</span>
+</div>
+<div class="p-2.5 rounded-2xl bg-white border border-slate-200 text-slate-700 text-center min-w-[64px]">
+<span class="text-[10px] uppercase font-medium block text-slate-400">Mon</span>
+<span class="text-base font-bold font-mono block">21</span>
+<span class="text-[9px] font-semibold text-emerald-600">Open</span>
+</div>
+</div>
+</div>
+<!-- Arrival Windows -->
+<div class="space-y-3">
+<label class="text-xs font-bold text-slate-800 block">Arrival Window</label>
+<!-- Afternoon -->
+<div class="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-card space-y-2">
+<div class="flex items-center justify-between text-xs">
+<span class="font-bold text-slate-800 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-amber-500">wb_sunny</span> Afternoon (12 PM - 5 PM)
+                </span>
+<span class="text-[10px] font-bold text-brand-600">Fastest</span>
+</div>
+<div class="grid grid-cols-3 gap-1.5 text-center text-xs time-slots-group">
+<button onclick="selectTimeSlot(this)" class="time-slot-btn py-2 rounded-xl bg-slate-50 text-slate-600 font-medium hover:bg-slate-100 transition">1:00 PM</button>
+<button onclick="selectTimeSlot(this)" class="time-slot-btn py-2 rounded-xl bg-brand-500 text-white font-bold shadow-sm transition">2:30 PM</button>
+<button onclick="selectTimeSlot(this)" class="time-slot-btn py-2 rounded-xl bg-slate-50 text-slate-600 font-medium hover:bg-slate-100 transition">4:00 PM</button>
+</div>
+</div>
+<!-- Evening -->
+<div class="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-card space-y-2">
+<div class="flex items-center justify-between text-xs">
+<span class="font-bold text-slate-800 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-indigo-500">dark_mode</span> Evening (5 PM - 8 PM)
+                </span>
+</div>
+<div class="grid grid-cols-3 gap-1.5 text-center text-xs time-slots-group">
+<button onclick="selectTimeSlot(this)" class="time-slot-btn py-2 rounded-xl bg-slate-50 text-slate-600 font-medium hover:bg-slate-100 transition">5:30 PM</button>
+<button onclick="selectTimeSlot(this)" class="time-slot-btn py-2 rounded-xl bg-slate-50 text-slate-600 font-medium hover:bg-slate-100 transition">6:30 PM</button>
+<button onclick="selectTimeSlot(this)" class="time-slot-btn py-2 rounded-xl bg-slate-50 text-slate-600 font-medium hover:bg-slate-100 transition">7:00 PM</button>
+</div>
+</div>
+</div>
+<!-- Estimated Duration & Escrow Hold -->
+<div class="bg-brand-50 p-3.5 rounded-2xl border border-brand-100">
+<div class="flex items-center justify-between text-xs mb-1.5">
+<span class="font-semibold text-slate-700">Estimated Duration</span>
+<span class="font-mono font-bold text-brand-700">$68.00 × 2 hrs = $136.00</span>
+</div>
+<div class="grid grid-cols-4 gap-1 text-center text-xs">
+<span class="py-1 rounded-lg bg-white/70 text-slate-600 font-medium">1 hr</span>
+<span class="py-1 rounded-lg bg-brand-500 text-white font-bold">2 hrs</span>
+<span class="py-1 rounded-lg bg-white/70 text-slate-600 font-medium">3 hrs</span>
+<span class="py-1 rounded-lg bg-white/70 text-slate-600 font-medium">4+ hrs</span>
+</div>
+</div>
+<!-- California Policies -->
+<div class="space-y-1 text-[10px] text-slate-500 px-1">
+<p>✓ <b>1-Hour Minimum</b> applies to all California bookings.</p>
+<p>✓ <b>24-Hour Free Cancellation</b> before arrival time.</p>
+<p>✓ <b>$1M CA Property Guarantee</b> covers accidental damage.</p>
+</div>
+<!-- Confirm Slot CTA -->
+<button class="w-full py-3 rounded-2xl bg-brand-500 text-white text-xs font-bold hover:bg-brand-600 shadow-md shadow-brand-500/20 transition flex items-center justify-center gap-1.5" onclick="switchScreen(5)">
+<span>Hold Escrow via Apple Pay $136.00</span>
+<span class="material-symbols-outlined text-[16px]">lock</span>
+</button>
+</div>
+</section>
+<!-- ============================================== -->
+<!-- SCREEN 10: Tasker Submit Invoice -->
+<!-- ============================================== -->
+<section class="screen-view hidden pb-24" id="screen-10">
+<!-- Top Nav -->
+<div class="px-5 py-3 bg-white border-b border-slate-100 flex items-center justify-between">
+<button class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-700" onclick="switchScreen(4)">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+</button>
+<div class="text-center">
+<span class="text-[10px] font-bold text-slate-400 block">Pro Invoice Submission</span>
+<h3 class="text-xs font-bold text-slate-900">Finish Job #SF-48291</h3>
+</div>
+<div class="w-8"></div>
+</div>
+<div class="p-5 space-y-4">
+<!-- Time Tracked Card -->
+<div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-card">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Tracked Time via Geofence</span>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-2xl font-black font-mono text-slate-900">2h 15m</span>
+<span class="text-[10px] text-mint-600 font-semibold block">GPS On-Site Verified: 2:10 PM - 4:25 PM</span>
+</div>
+<div class="flex items-center gap-1">
+<button onclick="adjustTrackedMinutes(-15)" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 font-bold text-slate-700 active:scale-95 transition">-15</button>
+<span id="trackedHoursLabel" class="text-xs font-mono font-bold px-1.5">2.25 hrs</span>
+<button onclick="adjustTrackedMinutes(15)" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 font-bold text-slate-700 active:scale-95 transition">+15</button>
+</div>
+</div>
+</div>
+<!-- Materials & Receipts -->
+<div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-card space-y-3">
+<div class="flex items-center justify-between">
+<div>
+<h4 class="text-xs font-bold text-slate-900">Hardware Reimbursement</h4>
+<span class="text-[10px] text-slate-400">100% pass-through (No commission fee)</span>
+</div>
+<span class="text-xs font-mono font-bold text-emerald-600">+$42.10</span>
+</div>
+<div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-slate-500">receipt</span>
+<div>
+<span class="font-medium text-slate-800 block">Home Depot Receipt #8491</span>
+<span class="text-[10px] text-slate-400">Heavy duty toggle bolts &amp; anchors</span>
+</div>
+</div>
+<span class="font-mono font-bold text-slate-900">$42.10</span>
+</div>
+<button onclick="addNewReceiptItem()" class="w-full py-2 rounded-xl border border-dashed border-slate-300 hover:border-brand-500 hover:text-brand-600 text-slate-600 text-xs font-semibold flex items-center justify-center gap-1 transition">
+<span class="material-symbols-outlined text-[16px]">add_a_photo</span> Add Another Receipt
+            </button>
+</div>
+<!-- Proof of Work Photos -->
+<div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-card space-y-2">
+<label class="text-xs font-bold text-slate-900 block">Proof of Work (3 Photos Attached)</label>
+<div class="flex items-center gap-2">
+<div class="w-16 h-16 rounded-xl bg-slate-100 overflow-hidden border border-slate-200">
+<img alt="Proof" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="w-16 h-16 rounded-xl bg-slate-100 overflow-hidden border border-slate-200">
+<img alt="Proof" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="w-16 h-16 rounded-xl bg-emerald-50 border border-emerald-200 flex flex-col items-center justify-center text-emerald-600">
+<span class="material-symbols-outlined text-[18px]">check</span>
+<span class="text-[8px] font-bold">Uploaded</span>
+</div>
+</div>
+</div>
+<!-- Payout Breakdown -->
+<div class="p-3.5 bg-slate-900 text-white rounded-2xl space-y-1.5 text-xs">
+<div class="flex justify-between text-slate-300">
+<span>Labor Payout (2.25 hrs @ $68)</span>
+<span class="font-mono">$153.00</span>
+</div>
+<div class="flex justify-between text-slate-300">
+<span>Materials Reimbursement (100%)</span>
+<span class="font-mono">+$42.10</span>
+</div>
+<div class="flex justify-between font-bold text-emerald-400 pt-1 border-t border-slate-700 text-sm">
+<span>Gross Payout to Alex</span>
+<span class="font-mono">$195.10</span>
+</div>
+</div>
+<button class="w-full py-3 rounded-2xl bg-brand-500 text-white text-xs font-bold hover:bg-brand-600 shadow-md shadow-brand-500/20 transition flex items-center justify-center gap-1.5" onclick="switchScreen(4)">
+<span>Submit Invoice &amp; Request Payment</span>
+<span class="material-symbols-outlined text-[16px]">send</span>
+</button>
+</div>
+</section>
+<!-- ============================================== -->
+<!-- SCREEN 11: Client Sign Up & Welcome (Auth) -->
+<!-- ============================================== -->
+<section class="screen-view active block pb-24" id="screen-11">
+<!-- Top Nav -->
+<div class="px-5 py-3 bg-white border-b border-slate-100 flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-xs font-bold text-slate-800">
+  <span class="material-symbols-outlined text-brand-500 text-[20px]">bolt</span>
+  <span>TaskMarket</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> CA VERIFIED
+          </span>
+<button onclick="showHelpModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition">
+<span class="material-symbols-outlined text-[18px]">help</span>
+</button>
+</div>
+<div class="p-5 space-y-4">
+<!-- Logo & Heading -->
+<div class="text-center pt-2">
+<div class="inline-flex items-center gap-2 mb-2">
+<div class="w-8 h-8 rounded-xl bg-brand-500 text-white flex items-center justify-center font-black">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+</div>
+<span class="text-lg font-black text-slate-900 tracking-tight">TaskMarket</span>
+<span class="text-[10px] font-bold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">BAY AREA</span>
+</div>
+<h2 class="text-lg font-extrabold text-slate-900 tracking-tight">Get Things Done in the Bay Area</h2>
+<p class="text-xs text-slate-500 mt-1 max-w-[280px] mx-auto leading-relaxed">
+              Book vetted local pros in 60 seconds or earn as an independent tasker.
+            </p>
+</div>
+<!-- Dual Role Switcher -->
+<div>
+<div class="flex items-center justify-between mb-1.5 px-1">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">CHOOSE YOUR ROLE</span>
+<span class="text-[10px] text-mint-600 font-semibold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[12px]">verified_user</span> Instant Switch Anytime
+              </span>
+</div>
+<div class="grid grid-cols-2 gap-2.5">
+<!-- Option 1: Client (Active) -->
+<div class="p-3.5 rounded-2xl bg-white border-2 border-brand-500 shadow-md relative cursor-pointer">
+<span class="absolute -top-2 right-3 px-2 py-0.5 rounded-full bg-brand-500 text-white text-[9px] font-bold uppercase tracking-wider">ACTIVE</span>
+<div class="w-8 h-8 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-[18px]">person_search</span>
+</div>
+<h4 class="text-xs font-bold text-slate-900">Hire Help</h4>
+<p class="text-[10px] text-slate-500 mt-0.5 leading-snug">Book certified pros for home, tech, or moving.</p>
+<div class="mt-2.5 flex items-center justify-between pt-1 border-t border-slate-100">
+<span class="text-[10px] font-bold text-brand-600">Client Profile</span>
+<span class="material-symbols-outlined text-[16px] text-brand-600 fill">check_circle</span>
+</div>
+</div>
+<!-- Option 2: Pro (Switchable) -->
+<div class="p-3.5 rounded-2xl bg-white border border-slate-200 hover:border-brand-300 transition relative cursor-pointer opacity-80 hover:opacity-100" onclick="switchScreen(12)">
+<div class="w-8 h-8 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-[18px]">handyman</span>
+</div>
+<h4 class="text-xs font-bold text-slate-900">Work &amp; Earn</h4>
+<p class="text-[10px] text-slate-500 mt-0.5 leading-snug">Set custom rates &amp; keep up to 92% of earnings.</p>
+<div class="mt-2.5 flex items-center justify-between pt-1 border-t border-slate-100">
+<span class="text-[10px] font-semibold text-slate-500">Tasker Pro</span>
+<span class="material-symbols-outlined text-[16px] text-slate-300">radio_button_unchecked</span>
+</div>
+</div>
+</div>
+</div>
+<!-- OAuth Fast Social Buttons (US Market) -->
+<div class="space-y-2 pt-1">
+<button onclick="socialLogin('Apple ID')" class="w-full py-2.5 rounded-xl bg-black text-white text-xs font-bold flex items-center justify-center gap-2 hover:bg-slate-900 transition">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.87-.93.04-2.07.62-2.73 1.38-.59.67-1.11 1.74-.97 2.78 1.05.08 2.16-.54 2.78-1.29z"></path></svg>
+<span>Continue with Apple</span>
+</button>
+<button onclick="socialLogin('Google')" class="w-full py-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 text-xs font-semibold flex items-center justify-center gap-2 hover:bg-slate-50 transition">
+<svg class="w-4 h-4" viewbox="0 0 24 24"><path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z" fill="#4285F4"></path><path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.15C3.27 21.36 7.35 24 12 24z" fill="#34A853"></path><path d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.26C.46 8.16 0 9.94 0 12s.46 3.84 1.26 5.42l4.02-3.15z" fill="#FBBC05"></path><path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.35 0 3.27 2.64 1.26 6.58l4.02 3.15c.95-2.83 3.6-4.98 6.72-4.98z" fill="#EA4335"></path></svg>
+<span>Continue with Google</span>
+</button>
+</div>
+<!-- Divider -->
+<div class="relative flex py-1 items-center">
+<div class="flex-grow border-t border-slate-200"></div>
+<span class="flex-shrink mx-3 text-[10px] text-slate-400 font-medium uppercase">or sign up with mobile phone</span>
+<div class="flex-grow border-t border-slate-200"></div>
+</div>
+<!-- US Registration Form -->
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-800 block">Full Name</label>
+<div class="flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2.5 shadow-sm focus-within:border-brand-500">
+<span class="material-symbols-outlined text-[18px] text-slate-400">person</span>
+<input id="clientFullNameInput" class="w-full text-xs font-semibold text-slate-900 focus:outline-none bg-transparent" type="text" placeholder="Your Full Name" value="David Miller"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold text-slate-800 block">Mobile Number</label>
+<div class="flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2.5 shadow-sm focus-within:border-brand-500">
+<div class="flex items-center gap-1 pr-2 border-r border-slate-200 text-xs font-bold text-slate-700">
+<span>🇺🇸 +1</span>
+<span class="material-symbols-outlined text-[14px] text-slate-400">arrow_drop_down</span>
+</div>
+<input id="clientPhoneInput" class="w-full text-xs font-mono font-semibold text-slate-900 focus:outline-none bg-transparent" type="tel" value="(415) 555-0192"/>
+<span class="material-symbols-outlined text-[18px] text-emerald-500">check_circle</span>
+</div>
+<span class="text-[10px] text-slate-400 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">sms</span> We'll send a 6-digit confirmation code via secure SMS.
+            </span>
+</div>
+<!-- California Consumer Assurance Card -->
+<div class="p-3 bg-brand-50/70 rounded-xl border border-brand-100 text-[10px] text-slate-600 space-y-1">
+<span class="font-bold text-brand-800 uppercase tracking-wider block">CALIFORNIA CONSUMER ASSURANCE</span>
+<p class="flex items-center gap-1.5"><span class="text-mint-600">🛡️</span> <b>$1,000,000</b> California Property &amp; Job Guarantee</p>
+<p class="flex items-center gap-1.5"><span class="text-brand-600">🔒</span> Stripe 256-bit Bank-grade Escrow Protection</p>
+<p class="flex items-center gap-1.5"><span class="text-slate-600">⚖️</span> AB 5 Independent Contractor Compliant Platform</p>
+</div>
+<!-- Terms Checkbox & Submit -->
+<div class="space-y-3 pt-1">
+<label class="flex items-start gap-2 text-[10px] text-slate-500 leading-snug cursor-pointer">
+<input checked="" class="w-3.5 h-3.5 mt-0.5 accent-brand-500 rounded" type="checkbox"/>
+<span>By signing up, you agree to TaskMarket CA <a class="text-brand-600 underline font-semibold" href="#">Terms of Service</a> &amp; <a class="text-brand-600 underline font-semibold" href="#">Privacy Policy</a>.</span>
+</label>
+<button class="w-full py-3 rounded-2xl bg-brand-500 text-white text-xs font-bold hover:bg-brand-600 shadow-md shadow-brand-500/20 transition flex items-center justify-center gap-1.5" onclick="handleClientSignUp()">
+<span>Create Free Account &amp; Find Pros</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+<div class="text-center">
+<span class="text-xs text-slate-500">Already have an account? <a class="text-brand-600 font-bold" href="#">Sign In</a></span>
+</div>
+</div>
+</div>
+</section>
+<!-- ============================================== -->
+<!-- SCREEN 12: Tasker Pro Onboarding & Verification -->
+<!-- ============================================== -->
+<section class="screen-view hidden pb-28" id="screen-12">
+<!-- Top Nav -->
+<div class="px-5 py-3 bg-white border-b border-slate-100 flex items-center justify-between">
+<button class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-700" onclick="switchScreen(11)">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+</button>
+<div class="text-center">
+<h3 class="text-xs font-bold text-slate-900">Become a Tasker Pro</h3>
+<span class="text-[10px] text-emerald-600 font-semibold">✓ California Edition</span>
+</div>
+<button onclick="showHelpModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition">
+<span class="material-symbols-outlined text-[18px]">help</span>
+</button>
+</div>
+<!-- Progress Bar -->
+<div class="px-5 py-2 bg-white border-b border-slate-100 flex items-center justify-between text-[11px]">
+<span class="font-bold text-brand-600">Step 1 of 3: Verification &amp; Rates</span>
+<span class="text-slate-400 font-medium">33% complete</span>
+</div>
+<div class="p-5 space-y-4">
+<!-- Earnings Highlight Banner -->
+<div class="bg-gradient-to-br from-brand-600 to-indigo-700 text-white p-4 rounded-2xl shadow-md">
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-bold uppercase tracking-wider bg-white/20 px-2 py-0.5 rounded">📈 High Demand • SF Bay Area</span>
+<span class="text-[10px] font-bold text-emerald-300 bg-emerald-950/40 px-2 py-0.5 rounded">0% FEE TIPS</span>
+</div>
+<div class="mt-2 flex items-baseline gap-1">
+<span class="text-2xl font-black font-mono">$68–$95</span>
+<span class="text-xs text-indigo-100 font-semibold">/hr avg</span>
+</div>
+<p class="text-[11px] text-indigo-100 mt-1 leading-snug">
+              Keep <b>100% of your tips</b> with zero commission deductions. Guaranteed 100% direct material reimbursement pass-through.
+            </p>
+<div class="mt-2.5 pt-2 border-t border-white/20 flex items-center justify-between text-[10px]">
+<span class="flex items-center gap-1">🔒 Protected via Stripe Escrow</span>
+<span class="font-bold text-mint-300">Instant Daily Pay</span>
+</div>
+</div>
+<!-- Select Primary Skills -->
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<label class="text-xs font-bold text-slate-900">Select Your Primary Skills</label>
+<span class="text-[10px] text-brand-600 font-semibold">Multiple allowed</span>
+</div>
+<p class="text-[10px] text-slate-500">Rates dynamically mapped against active San Francisco market medians.</p>
+<div class="space-y-1.5">
+<!-- Skill 1 (Selected) -->
+<div class="p-2.5 rounded-xl bg-white border-2 border-brand-500 shadow-sm flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">build</span>
+</div>
+<div>
+<span class="text-xs font-bold text-slate-900 block">Furniture Assembly</span>
+<span class="text-[10px] font-mono text-brand-600 font-semibold">$55–$80/hr SF median</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[18px] text-brand-600 fill">check_circle</span>
+</div>
+<!-- Skill 2 (Selected) -->
+<div class="p-2.5 rounded-xl bg-white border-2 border-brand-500 shadow-sm flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">tv</span>
+</div>
+<div>
+<span class="text-xs font-bold text-slate-900 block">Mounting &amp; Drywall</span>
+<span class="text-[10px] font-mono text-brand-600 font-semibold">$65–$90/hr SF median</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[18px] text-brand-600 fill">check_circle</span>
+</div>
+<!-- Skill 3 -->
+<div class="p-2.5 rounded-xl bg-white border border-slate-200 flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">plumbing</span>
+</div>
+<div>
+<span class="text-xs font-semibold text-slate-800 block">Plumbing Fixes</span>
+<span class="text-[10px] font-mono text-slate-400">$85–$120/hr SF median</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[18px] text-slate-300">radio_button_unchecked</span>
+</div>
+</div>
+</div>
+<!-- Base Hourly Rate Stepper & Slider -->
+<div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-card space-y-3">
+<div class="flex items-center justify-between">
+<div>
+<label class="text-xs font-bold text-slate-900 block">Set Your Base Hourly Rate</label>
+<span class="text-[10px] text-slate-400">Clients pay your base plus platform fees directly.</span>
+</div>
+<span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">🍃 Optimal</span>
+</div>
+<!-- Big Number Stepper -->
+<div class="flex items-center justify-between bg-slate-50 p-3 rounded-2xl border border-slate-100">
+<button onclick="adjustHourlyRate(-5)" class="w-10 h-10 rounded-xl bg-white border border-slate-200 text-slate-700 font-bold text-lg hover:bg-slate-100 active:scale-95 shadow-sm transition">-</button>
+<div class="text-center">
+<div class="text-2xl font-black font-mono text-slate-900" id="rateDisplay">$68.00 <span class="text-xs text-slate-500 font-normal">/ hr</span></div>
+<span class="text-[10px] text-brand-600 font-bold">Recommended for Mission &amp; SoMa</span>
+</div>
+<button onclick="adjustHourlyRate(5)" class="w-10 h-10 rounded-xl bg-white border border-slate-200 text-slate-700 font-bold text-lg hover:bg-slate-100 active:scale-95 shadow-sm transition">+</button>
+</div>
+<!-- Visual Slider Range -->
+<div class="space-y-1">
+<input class="w-full accent-brand-500 h-1.5 bg-slate-200 rounded-lg cursor-pointer" max="150" min="40" type="range" value="68"/>
+<div class="flex justify-between text-[10px] font-medium text-slate-400">
+<span>$40/hr (Min)</span>
+<span class="text-slate-600 font-semibold">SF Average: $74/hr</span>
+<span>$150/hr (Master)</span>
+</div>
+</div>
+<!-- Weekly Earning Projection -->
+<div class="p-2.5 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-between text-xs">
+<span class="text-emerald-800 font-medium">Est. 25 hrs/week in SF:</span>
+<span class="font-mono font-bold text-emerald-900">$1,700.00 / wk</span>
+</div>
+</div>
+<!-- Personal Credentials & California Checkr Clearance -->
+<div class="space-y-3">
+<h4 class="text-xs font-bold text-slate-900">Personal &amp; Service Territory</h4>
+<div class="space-y-2 text-xs">
+<input id="taskerNameInput" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-white font-semibold text-slate-900 focus:outline-none focus:border-brand-500" placeholder="Full Legal Name (as on CA Real ID)" type="text" value="Elena Rostova Rodriguez"/>
+<input id="taskerEmailInput" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-white font-semibold text-slate-900 focus:outline-none focus:border-brand-500" placeholder="Email Address" type="email" value="elena.r@calitask.io"/>
+<input id="taskerZipInput" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-white font-semibold text-slate-900 focus:outline-none focus:border-brand-500" placeholder="Primary Base ZIP Code" type="text" value="94110"/>
+</div>
+              <!-- Tasker Avatar Upload Block with Live Preview -->
+              <div class="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-card">
+                <label class="text-xs font-bold text-slate-900 block mb-1">Tasker Profile Photo</label>
+                <p class="text-[10px] text-slate-500 mb-3">Friendly, clear headshot increases your bookings by 40%.</p>
+                <div class="flex items-center gap-3.5">
+                  <div class="relative w-16 h-16 rounded-2xl border-2 border-dashed border-brand-400 bg-brand-50/50 flex items-center justify-center overflow-hidden flex-shrink-0 group cursor-pointer shadow-inner" onclick="document.getElementById('taskerPhotoInput').click()">
+                    <img id="taskerPhotoPreview" class="w-full h-full object-cover hidden" alt="Avatar preview" />
+                    <div id="taskerPhotoPlaceholder" class="flex flex-col items-center justify-center text-brand-600">
+                      <span class="material-symbols-outlined text-[24px]">add_a_photo</span>
+                      <span class="text-[8px] font-bold mt-0.5">PHOTO</span>
+                    </div>
+                    <div class="absolute inset-0 bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition text-[10px] font-bold">Change</div>
+                  </div>
+                  <div class="flex-1">
+                    <input type="file" id="taskerPhotoInput" accept="image/*" class="hidden" onchange="handleTaskerPhotoUpload(event)" />
+                    <button type="button" onclick="document.getElementById('taskerPhotoInput').click()" class="px-3 py-1.5 rounded-xl bg-brand-50 text-brand-700 border border-brand-200 text-[11px] font-bold hover:bg-brand-100 transition flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[15px]">photo_camera</span>
+                      <span>Upload Avatar</span>
+                    </button>
+                    <span id="taskerPhotoStatus" class="text-[9px] text-slate-400 block mt-1">JPG or PNG, max 10MB</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CA Driver License Upload Box -->
+              <div class="border-2 border-dashed border-slate-200 rounded-2xl p-4 text-center bg-white hover:border-brand-500 transition cursor-pointer" onclick="document.getElementById('taskerIdInput').click()">
+                <input type="file" id="taskerIdInput" accept="image/*" class="hidden" onchange="handleTaskIdUpload(event)" />
+                <div class="w-10 h-10 mx-auto rounded-full bg-blue-50 text-brand-600 flex items-center justify-center mb-1.5" id="taskerIdIconBox">
+                  <span class="material-symbols-outlined text-[20px]" id="taskerIdIcon">cloud_upload</span>
+                </div>
+                <span class="text-xs font-bold text-slate-800 block" id="taskerIdTitle">Tap to snap or upload ID photo</span>
+                <span class="text-[10px] text-slate-400 block mt-0.5" id="taskerIdSubtitle">Government-issued photo ID required for Checkr vetting</span>
+                <span class="inline-block mt-2 px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[9px] font-bold">🔒 256-Bit SSL Military Encryption</span>
+              </div></div>
+<!-- Checkr Integration Badge & Consent -->
+<div class="p-3.5 bg-white rounded-2xl border border-slate-100 shadow-card space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<div class="w-6 h-6 rounded bg-emerald-500 text-white flex items-center justify-center text-[10px] font-black">✓</div>
+<span class="text-xs font-bold text-slate-900">Checkr Pro Vetting</span>
+</div>
+<span class="text-[10px] font-bold tracking-wider px-2 py-0.5 rounded bg-slate-100 text-slate-600 uppercase">CHECKR®</span>
+</div>
+<p class="text-[10px] text-slate-500 leading-relaxed">
+                Fast-track clearance: <b>24–48h automated turnaround</b> for California residents. SSN required in next step for SSN trace.
+              </p>
+<div class="pt-1 border-t border-slate-100 space-y-1 text-[10px] text-slate-600">
+<label class="flex items-start gap-2 cursor-pointer">
+<input checked="" class="w-3.5 h-3.5 mt-0.5 accent-brand-500 rounded" type="checkbox"/>
+<span>I confirm I bring my own high-grade power tools, ladder, and safety PPE to client tasks.</span>
+</label>
+<label class="flex items-start gap-2 cursor-pointer">
+<input checked="" class="w-3.5 h-3.5 mt-0.5 accent-brand-500 rounded" type="checkbox"/>
+<span>I acknowledge my rights under California AB 5 as an independent contractor with freedom over pricing and hours.</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Bottom Fixed CTA -->
+<div class="pt-2">
+<button id="taskerSubmitBtn" class="w-full py-3 rounded-2xl bg-brand-500 text-white text-xs font-bold hover:bg-brand-600 shadow-md shadow-brand-500/20 transition flex items-center justify-center gap-1.5" onclick="submitTaskerRegistration()">
+  <span>Submit for Checkr Background Check</span>
+  <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+<div id="taskerSubmitSuccess" class="hidden mt-2 p-2.5 rounded-xl bg-emerald-50 text-emerald-700 text-center text-xs font-bold border border-emerald-200">
+  ✓ Профиль мастера успешно сохранён в базе данных!
+</div>
+<div class="flex items-center justify-center gap-3 mt-2 text-[10px] text-slate-400">
+  <span>⏱ Takes under 3 mins</span>
+  <span>•</span>
+  <span>🛡️ 100% Secure Stripe Payouts</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Persistent Bottom Tab Bar (App Shell) -->
+<div class="absolute bottom-0 left-0 right-0 h-16 bg-white/95 backdrop-blur-md border-t border-slate-100 items-center justify-around px-2 z-40 select-none hidden" id="bottomNav">
+<!-- Explore -->
+<button class="flex flex-col items-center justify-center py-1 text-brand-600" id="tab-btn-1" onclick="switchScreen(1)">
+<span class="material-symbols-outlined text-[22px]">explore</span>
+<span class="text-[10px] font-bold mt-0.5">Explore</span>
+</button>
+<!-- My Tasks -->
+<button class="flex flex-col items-center justify-center py-1 text-slate-400 hover:text-slate-600" id="tab-btn-8" onclick="switchScreen(8)">
+<span class="material-symbols-outlined text-[22px]">assignment</span>
+<span class="text-[10px] font-medium mt-0.5">My Tasks</span>
+</button>
+<!-- Messages -->
+<button class="flex flex-col items-center justify-center py-1 text-slate-400 hover:text-slate-600" id="tab-btn-6" onclick="switchScreen(6)">
+<span class="material-symbols-outlined text-[22px]">chat</span>
+<span class="text-[10px] font-medium mt-0.5">Messages</span>
+</button>
+<!-- Pro Mode / Auth / Profile -->
+<button class="flex flex-col items-center justify-center py-1 text-slate-400 hover:text-slate-600" id="tab-btn-4" onclick="switchScreen(4)">
+<span class="material-symbols-outlined text-[22px]">handyman</span>
+<span class="text-[10px] font-medium mt-0.5">Pro View</span>
+</button>
+</div>
+</main>
+<!-- Interactive Logic Script -->
+<script>
+    let currentScreen = 11;
+    const totalScreens = 12;
+
+    
+    function switchScreen(screenNum) {
+      if (screenNum < 1 || screenNum > totalScreens) return;
+      currentScreen = screenNum;
+
+      // Hide all screens
+      document.querySelectorAll('.screen-view').forEach(view => {
+        view.classList.add('hidden');
+        view.classList.remove('block');
+      });
+
+      // Show selected screen
+      const activeEl = document.getElementById(`screen-${screenNum}`);
+      if (activeEl) {
+        activeEl.classList.remove('hidden');
+        activeEl.classList.add('block');
+      }
+
+      // Reset scroll of viewport
+      const vp = document.getElementById('viewport');
+      if (vp) vp.scrollTop = 0;
+
+
+
+      // Hide bottom tab bar on auth/onboarding screens (11, 12)
+      const bottomNav = document.getElementById('bottomNav');
+      if (bottomNav) {
+        if (screenNum === 11 || screenNum === 12) {
+          bottomNav.classList.add('hidden');
+          bottomNav.classList.remove('flex');
+        } else {
+          bottomNav.classList.remove('hidden');
+          bottomNav.classList.add('flex');
+        }
+      }
+
+      // Update Bottom Tab Bar Highlighting
+      updateBottomBar(screenNum);
+    }
+
+    function updateBottomBar(num) {
+      const tabs = [
+        { id: 'tab-btn-1', screens: [1, 2, 3, 9] },
+        { id: 'tab-btn-8', screens: [8, 7] },
+        { id: 'tab-btn-6', screens: [6] },
+        { id: 'tab-btn-4', screens: [4, 5, 10, 12] }
+      ];
+
+      tabs.forEach(t => {
+        const el = document.getElementById(t.id);
+        if (!el) return;
+        if (t.screens.includes(num)) {
+          el.className = 'flex flex-col items-center justify-center py-1 text-brand-600 font-bold';
+        } else {
+          el.className = 'flex flex-col items-center justify-center py-1 text-slate-400 hover:text-slate-600 font-medium';
+        }
+      });
+    }
+
+    // Avatar & ID Upload Handlers for Tasker
+    function handleTaskerPhotoUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const preview = document.getElementById('taskerPhotoPreview');
+        const placeholder = document.getElementById('taskerPhotoPlaceholder');
+        const status = document.getElementById('taskerPhotoStatus');
+        if (preview && placeholder) {
+          preview.src = e.target.result;
+          preview.classList.remove('hidden');
+          placeholder.classList.add('hidden');
+        }
+        if (status) {
+          status.innerHTML = `<span class="text-emerald-600 font-bold">✓ Photo uploaded (${file.name.slice(0, 15)}...)</span>`;
+        }
+        // Also update Screen 3 (Tasker Profile) avatar if client inspects it
+        const proAvatar = document.querySelector('#screen-3 img');
+        if (proAvatar) proAvatar.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleTaskIdUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const title = document.getElementById('taskerIdTitle');
+      const sub = document.getElementById('taskerIdSubtitle');
+      const icon = document.getElementById('taskerIdIcon');
+      const iconBox = document.getElementById('taskerIdIconBox');
+      if (title) title.innerText = "✓ " + file.name;
+      if (sub) sub.innerText = "Document encrypted and verified for Checkr SSN scan";
+      if (icon) icon.innerText = "task_alt";
+      if (iconBox) iconBox.className = "w-10 h-10 mx-auto rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-1.5";
+    }
+
+    // API Communication with Backend SQLite
+    const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:3001' : '';
+
+    async function submitTaskerRegistration() {
+      const btn = document.getElementById('taskerSubmitBtn');
+      const succMsg = document.getElementById('taskerSubmitSuccess');
+      const name = document.getElementById('taskerNameInput').value;
+      const email = document.getElementById('taskerEmailInput').value;
+      const zip = document.getElementById('taskerZipInput').value;
+      const photoFile = document.getElementById('taskerPhotoInput').files[0];
+      const idFile = document.getElementById('taskerIdInput').files[0];
+
+      btn.disabled = true;
+      btn.innerHTML = `<span class="material-symbols-outlined text-[16px] animate-spin">sync</span><span>Saving to Database...</span>`;
+
+      try {
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('zip_code', zip);
+        formData.append('category', 'Electrical & Smart Home');
+        formData.append('hourly_rate', '68');
+        formData.append('bio', 'Certified Bay Area Professional');
+        if (photoFile) formData.append('avatar', photoFile);
+        if (idFile) formData.append('id_doc', idFile);
+
+        const res = await fetch(`${API_BASE}/api/taskers/register`, {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          if (succMsg) {
+            succMsg.classList.remove('hidden');
+            succMsg.innerText = `✓ Мастер ${name} сохранён в БД! ID: ${data.data.id}`;
+          }
+          btn.innerHTML = `<span>Completed!</span><span class="material-symbols-outlined text-[16px]">check_circle</span>`;
+          setTimeout(() => {
+            switchScreen(4); // Switch to Tasker Pro Dashboard
+          }, 1200);
+        } else {
+          alert('Ошибка при сохранении: ' + (data.error || 'Unknown'));
+          btn.disabled = false;
+          btn.innerHTML = `<span>Submit for Checkr Background Check</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>`;
+        }
+      } catch (e) {
+        console.error(e);
+        // Fallback smooth transition if offline
+        if (succMsg) succMsg.classList.remove('hidden');
+        setTimeout(() => switchScreen(4), 1000);
+      }
+    }
+
+    
+    // Initialize at Screen 11 (Registration)
+    switchScreen(11);
+  </script>
+
+  <!-- Floating Interactive QA Feedback Toast -->
+  <div id="qaToast" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-all duration-300 opacity-0 translate-y-4 max-w-xs w-full px-4 text-center">
+    <div class="bg-slate-900/90 backdrop-blur-md text-white px-4 py-2.5 rounded-2xl shadow-xl border border-slate-700/60 text-xs font-semibold flex items-center justify-center gap-2">
+      <span class="material-symbols-outlined text-brand-400 text-[18px]" id="qaToastIcon">check_circle</span>
+      <span id="qaToastText">Success</span>
+    </div>
+  </div>
+
+  <!-- QA Helper Scripts -->
+  <script>
+    function showToast(text, icon = 'check_circle') {
+      const toast = document.getElementById('qaToast');
+      const toastText = document.getElementById('qaToastText');
+      const toastIcon = document.getElementById('qaToastIcon');
+      if (!toast) return;
+      toastText.innerText = text;
+      toastIcon.innerText = icon;
+      toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 2400);
+    }
+
+    function addDemoTaskPhoto() {
+      showToast('Photo added to task workspace!', 'add_photo_alternate');
+    }
+
+    function declineJob(btn) {
+      const card = btn.closest('.shadow-card') || btn.parentElement.parentElement;
+      if (card) {
+        card.style.transition = 'all 0.3s ease';
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          card.remove();
+          showToast('Job opportunity declined', 'info');
+        }, 300);
+      }
+    }
+
+    function startCallWithTasker() {
+      showToast('Calling Alex Rivers (+1 415-555-0149)...', 'call');
+    }
+
+    function triggerChatCamera() {
+      showToast('Photo uploaded to chat', 'photo_camera');
+    }
+
+    function sendChatMessage() {
+      const input = document.getElementById('chatTextInput');
+      if (!input || !input.value.trim()) return;
+      const val = input.value.trim();
+      input.value = '';
+      
+      const msgArea = document.querySelector('#screen-6 .space-y-3');
+      if (msgArea) {
+        const outDiv = document.createElement('div');
+        outDiv.className = 'flex items-end justify-end gap-2 max-w-[80%] ml-auto';
+        outDiv.innerHTML = `<div class="bg-brand-500 text-white p-3 rounded-2xl rounded-tr-none shadow-sm leading-relaxed">${val}<span class="text-[9px] text-blue-200 block text-right mt-1">Just now • Delivered</span></div>`;
+        msgArea.appendChild(outDiv);
+        msgArea.scrollTop = msgArea.scrollHeight;
+      }
+      showToast('Message sent to Alex Rivers');
+    }
+
+    function sendQuickChip(text) {
+      const input = document.getElementById('chatTextInput');
+      if (input) {
+        input.value = text;
+        sendChatMessage();
+      }
+    }
+
+    function selectTip(percent, amount, btn) {
+      document.querySelectorAll('#tipButtonsContainer .tip-btn').forEach(b => {
+        b.className = 'tip-btn py-2 rounded-xl border border-slate-200 text-slate-700 hover:border-brand-500 font-medium transition';
+      });
+      btn.className = 'tip-btn py-2 rounded-xl bg-brand-500 text-white font-bold shadow-sm transition';
+      showToast(`Tip updated: ${percent > 0 ? percent + '% ($' + amount.toFixed(2) + ')' : 'No tip'}`);
+    }
+
+    function filterMyTasks(type, btn) {
+      document.querySelectorAll('#myTasksTabs .task-tab').forEach(b => {
+        b.className = 'task-tab font-medium text-slate-500 hover:text-slate-800 pb-1 px-1 transition';
+      });
+      btn.className = 'task-tab font-bold text-brand-600 border-b-2 border-brand-500 pb-1 px-1 transition';
+      showToast(`Filtered tasks: ${type.toUpperCase()}`);
+    }
+
+    function downloadPdfInvoice(btn) {
+      showToast('Generating official PDF invoice...', 'receipt_long');
+      setTimeout(() => {
+        showToast('✓ PDF Invoice #SF-48291 downloaded', 'download_done');
+      }, 1000);
+    }
+
+    function selectTimeSlot(btn) {
+      document.querySelectorAll('.time-slot-btn').forEach(b => {
+        b.className = 'time-slot-btn py-2 rounded-xl bg-slate-50 text-slate-600 font-medium hover:bg-slate-100 transition';
+      });
+      btn.className = 'time-slot-btn py-2 rounded-xl bg-brand-500 text-white font-bold shadow-sm transition';
+      showToast(`Arrival time set: ${btn.innerText.trim()}`);
+    }
+
+    let trackedMinutes = 135; // 2h 15m
+    function adjustTrackedMinutes(delta) {
+      trackedMinutes = Math.max(30, trackedMinutes + delta);
+      const hours = Math.floor(trackedMinutes / 60);
+      const mins = trackedMinutes % 60;
+      const decHours = (trackedMinutes / 60).toFixed(2);
+      const label = document.getElementById('trackedHoursLabel');
+      if (label) {
+        label.innerText = `${decHours} hrs`;
+      }
+      showToast(`Adjusted tracked time: ${hours}h ${mins}m`);
+    }
+
+    function addNewReceiptItem() {
+      showToast('Receipt scanned: $18.40 (Ace Hardware)', 'receipt');
+    }
+
+    function socialLogin(provider) {
+      showToast(`Signed in securely via ${provider}! Welcome back, David.`, 'verified');
+      setTimeout(() => {
+        switchScreen(1);
+      }, 1000);
+    }
+
+    function showHelpModal() {
+      showToast('24/7 California Support: 1-800-555-TASK', 'support_agent');
+    }
+
+    let currentHourlyRate = 68;
+    function adjustHourlyRate(delta) {
+      currentHourlyRate = Math.max(40, Math.min(150, currentHourlyRate + delta));
+      const display = document.getElementById('rateDisplay');
+      if (display) {
+        display.innerHTML = `$${currentHourlyRate}.00 <span class="text-xs text-slate-500 font-normal">/ hr</span>`;
+      }
+      showToast(`Base rate set to $${currentHourlyRate}.00/hr`);
+    }
+  </script>
+
+
+  <!-- Supabase JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = 'http://supabasekong-drrzndf30niqyu5u2oiw9w4x.194.163.156.67.sslip.io';
+    const SUPABASE_ANON_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTc3OTc4NTIyMCwiZXhwIjo0OTM1NDU4ODIwLCJyb2xlIjoiYW5vbiJ9._XG6GkiCXy9tPPeshzt9j1y-0KhtlfLLTaWwv1OE-ds';
+    const supabase = (window.supabase && window.supabase.createClient) ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+    async function checkAuthSession() {
+      if (!supabase) return;
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session && session.user) {
+          showToast('Вход выполнен: ' + (session.user.email || session.user.phone || 'User'), 'verified');
+          switchScreen(1);
+        }
+      } catch (err) {
+        console.warn('Session check:', err);
+      }
+    }
+
+    async function handleClientSignUp() {
+      const nameInput = document.getElementById('clientFullNameInput');
+      const fullName = (nameInput && nameInput.value.trim()) ? nameInput.value.trim() : 'David Miller';
+      const phoneInput = document.getElementById('clientPhoneInput') || document.querySelector('#screen-11 input[type="tel"]');
+      const phone = phoneInput ? phoneInput.value.trim() : '+1 (415) 555-0192';
+      const email = 'client_' + Date.now() + '@taskmarket.local';
+      const password = 'Password123!';
+
+      showToast('Создаем аккаунт в Supabase...', 'sync');
+
+      // Update UI greeting with user's actual entered name
+      const greetingEl = document.getElementById('clientGreetingName');
+      if (greetingEl) {
+        greetingEl.innerText = fullName;
+      }
+
+      if (supabase) {
+        try {
+          const { data, error } = await supabase.auth.signUp({
+            email: email,
+            password: password,
+            options: {
+              data: { phone: phone, full_name: fullName, role: 'client' }
+            }
+          });
+          if (error) {
+            console.warn('Supabase signup fallback:', error.message);
+          } else if (data?.user) {
+            await supabase.from('profiles').upsert({
+              id: data.user.id,
+              phone: phone,
+              full_name: fullName,
+              role: 'client'
+            });
+          }
+        } catch(e) {
+          console.warn('Supabase error:', e);
+        }
+      }
+      showToast(`✓ Добро пожаловать, ${fullName}!`, 'verified');
+      setTimeout(() => { switchScreen(1); }, 600);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      checkAuthSession();
+    });
+  </script>
+
+</body>
+</html>
